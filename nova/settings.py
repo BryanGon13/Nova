@@ -29,7 +29,15 @@ SECRET_KEY = 'django-insecure-lto1!%_jr@pwm#@qhf@)l8c$*7!g*%&r8+s2e^pg00=cuw%ryi
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ["127.0.0.1", "localhost", "your-server-ip", "your-domain.com", ".heroku.com"]
+ALLOWED_HOSTS = [
+    "127.0.0.1",
+    "localhost",
+    "your-server-ip",
+    "your-domain.com",
+    ".heroku.com",
+    "nova-restaurant-54f750dd6682.herokuapp.com",
+]
+
 
 
 
