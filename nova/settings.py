@@ -143,5 +143,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Environment Variables
 
-SECRET_KEY = os.environ['Xv9pLq2GmY3']  
+SECRET_KEY = os.environ.get('SECRET_KEY', 'Xv9pLq2GmY3')
+
 
