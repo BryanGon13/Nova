@@ -1,0 +1,4 @@
+asgiref==3.8.1
+Django==4.2.18
+PuLP==2.9.0
+sqlparse==0.5.3
