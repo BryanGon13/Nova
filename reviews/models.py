@@ -15,11 +15,19 @@ class Review(models.Model):
     
     # links the review to a user and deletes the review if the user is deleted.
     author = models.ForeignKey(User, on_delete=models.CASCADE)
-
     rating = models.PositiveSmallIntegerField(choices=STAR_RATINGS)
+    title = models.CharField(max_length=100) 
     created_on = models.DateTimeField(auto_now_add=True)
     body = models.TextField()
 
-    # to provide a readable string representation when it appears in the Django admin panel
+    # posts will now be listed from oldest to newest creation time.
+    class Meta:
+        ordering = ['-created_on']  
+
+    # now reviews will be displayed in a human.readable manner in the admin panel.
+    def __str__(self):
+        return f"{self.title} | written by {self.author}"
+
+    # to provide a readable string representation when it appears in the Django admin panel.
     def __str__(self):
         return f"Review by {self.author} - {self.rating} Stars"
