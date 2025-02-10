@@ -16,7 +16,7 @@ class Review(models.Model):
     # links the review to a user and deletes the review if the user is deleted.
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     rating = models.PositiveSmallIntegerField(choices=STAR_RATINGS)
-    title = models.CharField(max_length=100) 
+    title = models.CharField(max_length=100, default="Untitled Review")
     created_on = models.DateTimeField(auto_now_add=True)
     body = models.TextField()
 
