@@ -26,4 +26,4 @@ class Review(models.Model):
 
     # now reviews will be displayed in a human.readable manner in the admin panel.
     def __str__(self):
-        return f"{self.title} | written by {self.author} - {self.rating} Stars"
+        return f"{self.title} | [written by {self.author}] - [{self.rating} Stars]"

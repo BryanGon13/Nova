@@ -6,3 +6,4 @@ psycopg2==2.9.10
 PuLP==2.9.0
 setuptools==75.8.0
 sqlparse==0.5.3
+django-summernote==0.8.20.0
