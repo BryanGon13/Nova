@@ -1,9 +1,13 @@
 asgiref==3.8.1
+bleach==6.2.0
 dj-database-url==0.5.0
 Django==4.2.18
+django-summernote==0.8.20.0
 gunicorn==20.1.0
+pillow==11.1.0
 psycopg2==2.9.10
 PuLP==2.9.0
 setuptools==75.8.0
 sqlparse==0.5.3
-django-summernote==0.8.20.0
+webencodings==0.5.1
+whitenoise==5.3.0
