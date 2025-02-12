@@ -1,7 +1,7 @@
-from django.shortcuts import render
-from django.http import HttpResponse
+from django.views.generic import ListView
+from .models import Review
 
-# Create your views here.
-
-def reservation_home(request):
-    return HttpResponse("Customer Reviews")
+class UserReview(ListView):
+    model = Review
+    template_name = "reviews/reviews.html"  # Ensure it matches your file location
+    context_object_name = "review_list"
