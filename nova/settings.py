@@ -28,7 +28,7 @@ TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
 SECRET_KEY = 'django-insecure-lto1!%_jr@pwm#@qhf@)l8c$*7!g*%&r8+s2e^pg00=cuw%ryi'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = [
     "127.0.0.1",
@@ -53,11 +53,13 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'django_summernote',
+    "django_bootstrap5", 
 
     'reservations',
     'reviews',
     'menu',
     'aboutus',
+    'home',
 ]
 
 MIDDLEWARE = [
