@@ -1,7 +1,6 @@
 /* General Styles */
 body {
     background-color: #F9FAFC;
-    padding-bottom: 20px;
 }
 
 /* Branding */
@@ -47,10 +46,12 @@ body {
     object-fit: cover;
 }
 
-
-
 #navbarMenu.show {
     transform: translateX(0);
+}
+
+.offcanvas-body{
+    text-align: center;
 }
 
 /* Buttons */
@@ -66,6 +67,71 @@ body {
 }
 
 /* Footer */
-.footer {
+/* To position the footer at the bottom of the page */
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main {
+    flex-grow: 1; /* This allows the main content to grow and push footer to the bottom */
+}
+
+footer {
+    background-color: #212529; /* Dark background to match the header */
+    color: white; /* White text */
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border-top: 1px solid #444; /* Similar to the border-bottom of the header */
+}
+
+footer .container {
+    max-width: 100%; /* Full-width for container */
+}
+
+footer .nav {
+    justify-content: flex-end;
+}
+
+footer .nav a {
+    color: white; /* White icon color */
+}
+
+footer .nav a:hover {
+    color: #00b4d8; /* Change icon color on hover */
+}
+
+footer svg {
+    fill: white;
+}
+
+footer .col-md-4 {
+    display: flex;
+    align-items: center;
+}
+
+footer .col-md-4 span {
+    color: white;
+}
+
+footer .col-md-4 .text-body-secondary {
+    color: #6c757d;
+}
+
+
+
+
+
+/* Menu Page styling */
+
+.intro-text{
+    margin-bottom: 40px;
     text-align: center;
+}
+
+.intro-text p {
+    max-width: 550px;
+    text-align: center;
+    margin: 20px auto 0 auto;
 }

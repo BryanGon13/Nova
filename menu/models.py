@@ -25,7 +25,7 @@ class Menu(models.Model):
     vegan = models.BooleanField(default=False)
     gluten_free = models.BooleanField(default=False)
     allergens = models.TextField(blank=True, null=True)
-    image = models.ImageField(upload_to="menu_images/")
+    image = models.ImageField(upload_to="static/images/menu_images")
     
 
     def __str__(self):
