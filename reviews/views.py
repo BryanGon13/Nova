@@ -2,15 +2,21 @@ from django.shortcuts import render, redirect
 from .models import Review
 from .forms import ReviewForm
 
-def review_list(request):
+def submit_review(request):
+    if request.method == "POST":
+        form = ReviewForm(request.POST)
+        if form.is_valid():
+            review = form.save(commit=False)
+            review.author = request.user  # Set the author automatically
+            review.save()
+            return redirect('reviews')  # Adjust as needed
+    else:
+        form = ReviewForm()
+    
+     # ✅ Fetch reviews to pass to the template
     reviews = Review.objects.all()
-    form = ReviewForm()
-    return render(request, 'reviews/reviews.html', {'reviews': reviews, 'form': form})
-    
-    if request.method == "POST" and form.is_valid():
-        new_review = form.save(commit=False)
-        new_review.author = request.user  # Assign the logged-in user as the review author
-        new_review.save()
-        return redirect('reviews:review_list')  # Redirect to the same page after saving the review
-    
-    return render(request, 'reviews.html', {'reviews': reviews, 'form': form})
+
+    return render(request, 'reviews/reviews.html', {
+        'form': form,
+        'reviews': reviews
+    })

@@ -16,54 +16,75 @@
         </div>
     </div>
     
-    <!-- Display Reviews -->
-    <div class="tab-content mt-3">
-        {% for category in review_categories %}
-        <div class="tab-pane fade {% if forloop.first %}show active{% endif %}" id="{{ category.name|slugify }}">
-            <div class="container">
-                {% for review in reviews %}
-                {% if review.category == category %}
-                <div class="row align-items-center py-3 border-bottom">
-                    <!-- Review Content -->
-                    <div class="col-md-9">
-                        <h5 class="mb-1">{{ review.title }}</h5>
-                        <p class="text-muted mb-2">{{ review.body|truncatewords:20 }}</p>
-    
-                        <!-- Rating -->
-                        <p class="mb-1"><strong>Rating:</strong> {{ review.get_rating_display }}</p>
-    
-                        <!-- Author Name and Date -->
-                        <p class="card-text text-muted h6">By {{ review.author.username }} on {{ review.created_on|date:"F j, Y" }}</p>
-                    </div>
-    
-                    <!-- Category Badge (if any) -->
-                    <div class="col-md-3">
-                        <span class="badge bg-primary">{{ category.name }}</span>
+    <div class="container">
+        <div class="row justify-content-center align-items-center">
+            <div class="col-md-8">
+
+                <!-- Display Reviews -->
+                <div class="tab-content mt-3">
+                    <div class="tab-pane fade show active" id="reviews">
+                        {% for review in reviews %}
+                        <div class="row align-items-center py-3 border-bottom">
+
+                            <!-- Review Content -->
+                            <div class="col-md-12 border shadow-lg p-3 mb-5 bg-body-tertiary rounded">
+                                
+                                <p class="mb-4 mt-4"><strong>Rating:</strong> {{ review.get_rating_display|safe }} </p>
+                                <h5 class="mb-4 text-center">{{ review.title }}</h5>
+                                <p class="text-muted mb-4 text-justify">{{ review.body|safe }}</p>
+                                <p class="mb-1 card-text text-muted h6 text-end">By {{ review.author.username }}</p>
+                                <p class="mb-4 card-text text-muted h6 text-end">on {{ review.created_on|date:"F j, Y" }}</p>
+                                
+                            </div>
+                        </div>
+                        {% endfor %}
                     </div>
                 </div>
+
+
+    
+    
+                {% if reviews|length == 0 %}
+                <p class="text-muted text-center">No reviews have been posted yet.</p>
                 {% endif %}
-                {% endfor %}
-            </div>
-        </div>
-        {% endfor %}
-    </div>
-    
-    
-    {% if reviews|length == 0 %}
-        <p class="text-muted text-center">No reviews have been posted yet.</p>
-    {% endif %}
     
 
-    <!-- Review Form (Below reviews) -->
-    <div class="row mt-5">
-        <div class="col-12">
-            <h3>Submit Your Review</h3>
-            <form method="POST">
-                {% csrf_token %}
-                {{ form.as_p }}  <!-- Renders the form fields -->
-                <button type="submit" class="btn btn-primary">Submit Review</button>
-            </form>
-        </div>
+                <!-- Review Form (Below reviews) -->
+                <div class="tab-content mt-3"></div>
+                <form method="POST">
+                    {% csrf_token %}
+    
+                    <div class="row mb-3">
+                        <label for="{{ form.title.id_for_label }}" class="col-sm-2 col-form-label">Title</label>
+                        <div class="col-sm-10">
+                            {{ form.title }}
+                        </div>
+                    </div>
+    
+                    <div class="row mb-3">
+                        <label for="{{ form.rating.id_for_label }}" class="col-sm-2 col-form-label">Rating</label>
+                        <div class="col-sm-10">
+                            {{ form.rating }}
+                        </div>
+                    </div>
+    
+                    <div class="row mb-3">
+                        <label for="{{ form.body.id_for_label }}" class="col-sm-2 col-form-label">Review</label>
+                        <div class="col-sm-10">
+                            {{ form.body }}
+                        </div>
+                    </div>
+    
+                    <div class="row mb-3">
+                        <div class="col text-center">
+                            <button type="submit" class="btn btn-primary">Submit Review</button>
+                        </div>
+                    </div>
+    
+                </form>
+                </div>
+            </div>
+        </div>      
     </div>
 
 </div>
