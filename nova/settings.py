@@ -68,8 +68,8 @@ ROOT_URLCONF = 'nova.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [TEMPLATES_DIR],
-        'APP_DIRS': True,
+        'DIRS': [BASE_DIR / 'templates'],  # Global templates directory
+        'APP_DIRS': True,  # Allows Django to search in app-specific templates folders
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
@@ -80,6 +80,10 @@ TEMPLATES = [
         },
     },
 ]
+
+
+
+
 
 WSGI_APPLICATION = 'nova.wsgi.application'
 

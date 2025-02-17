@@ -1,59 +1,71 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block content %}
 
 <div class="container-fluid">
-    <div class="row">
 
-        <!-- Review Entries Column -->
-        <div class="col-12 mt-3">
-            <div class="row">
-                {% for review in review_list %}
-                <div class="col-md-4">
-                    <div class="card mb-4">
-                        <div class="card-body">
-                            <div class="image-container">
-                                <div class="image-flash">
-                                    <p class="author">Author: {{ review.author.username }}</p>
-                                </div>
-                            </div>
-                            <h2 class="card-title">{{ review.title }}</h2>
-                            <p class="card-text"><strong>Rating:</strong> {{ review.get_rating_display }}</p>
-                            <p class="card-text">{{ review.body|truncatewords:20 }}</p>
-                            <hr />
-                            <p class="card-text text-muted h6">Posted on {{ review.created_on|date:"F j, Y" }}</p>
-                            <a href="#" class="btn btn-primary">Read More</a>
-                        </div>
+    <!-- Intro Section -->
+    <div class="row">
+        <div class="col-12 intro-text text-center">
+            <h1>Customer Reviews</h1>
+            <p>
+                Hear from our customers and discover why our services are truly out of this world! 
+                Read reviews, check ratings, and find out what makes us a favorite.
+            </p>
+        </div>
+    </div>
+    
+    <!-- Display Reviews -->
+    <div class="tab-content mt-3">
+        {% for category in review_categories %}
+        <div class="tab-pane fade {% if forloop.first %}show active{% endif %}" id="{{ category.name|slugify }}">
+            <div class="container">
+                {% for review in reviews %}
+                {% if review.category == category %}
+                <div class="row align-items-center py-3 border-bottom">
+                    <!-- Review Content -->
+                    <div class="col-md-9">
+                        <h5 class="mb-1">{{ review.title }}</h5>
+                        <p class="text-muted mb-2">{{ review.body|truncatewords:20 }}</p>
+    
+                        <!-- Rating -->
+                        <p class="mb-1"><strong>Rating:</strong> {{ review.get_rating_display }}</p>
+    
+                        <!-- Author Name and Date -->
+                        <p class="card-text text-muted h6">By {{ review.author.username }} on {{ review.created_on|date:"F j, Y" }}</p>
+                    </div>
+    
+                    <!-- Category Badge (if any) -->
+                    <div class="col-md-3">
+                        <span class="badge bg-primary">{{ category.name }}</span>
                     </div>
                 </div>
-
-                {% if forloop.counter|divisibleby:3 %}
-            </div>
-            <div class="row">
                 {% endif %}
-                {% empty %}
-                <p class="text-muted text-center">No reviews have been posted yet.</p>
                 {% endfor %}
             </div>
         </div>
+        {% endfor %}
+    </div>
+    
+    
+    {% if reviews|length == 0 %}
+        <p class="text-muted text-center">No reviews have been posted yet.</p>
+    {% endif %}
+    
+
+    <!-- Review Form (Below reviews) -->
+    <div class="row mt-5">
+        <div class="col-12">
+            <h3>Submit Your Review</h3>
+            <form method="POST">
+                {% csrf_token %}
+                {{ form.as_p }}  <!-- Renders the form fields -->
+                <button type="submit" class="btn btn-primary">Submit Review</button>
+            </form>
+        </div>
     </div>
 
-    {% if is_paginated %}
-    <nav aria-label="Page navigation">
-        <ul class="pagination justify-content-center">
-            {% if page_obj.has_previous %}
-            <li class="page-item">
-                <a href="?page={{ page_obj.previous_page_number }}" class="page-link"> &laquo; Previous</a>
-            </li>
-            {% endif %}
-            {% if page_obj.has_next %}
-            <li class="page-item">
-                <a href="?page={{ page_obj.next_page_number }}" class="page-link">Next &raquo;</a>
-            </li>
-            {% endif %}
-        </ul>
-    </nav>
-    {% endif %}
 </div>
 
 {% endblock %}
