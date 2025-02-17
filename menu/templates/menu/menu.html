@@ -1,68 +1,78 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block content %}
 
 <div class="container-fluid">
 
     <div class="row">
-        <div class="col-12 intro-text">
+        <div class="col-12 intro-text text-center">
             <h1>Explore our Menu</h1>
             <p>
                 Embark on a cosmic culinary journey with our intergalactic menu, featuring stellar flavors inspired by the universe. 
                 Explore our menu and discover a dining experience that's truly out of this world!
             </p>
         </div>
-       
     </div>
     
     <!-- Tabs Navigation -->
-<ul class="nav nav-underline nav-tabs justify-content-center" id="menu-tabs">
-    {% for category in categories %}
-    <li class="nav-item">
-        <a class="nav-link {% if forloop.first %}active{% endif %}" data-bs-toggle="tab" href="#{{ category.name|slugify }}">{{ category.name }}</a>
-    </li>
-    {% endfor %}
-</ul>
+    <ul class="nav nav-underline nav-tabs justify-content-center" id="menu-tabs">
+        {% for category in categories %}
+        <li class="nav-item">
+            <a class="nav-link {% if forloop.first %}active{% endif %}" data-bs-toggle="tab" href="#{{ category.name|slugify }}">
+                {{ category.name }}
+            </a>
+        </li>
+        {% endfor %}
+    </ul>
 
-<!-- Tab Content -->
-<div class="tab-content mt-3">
-    {% for category in categories %}
-    <div class="tab-pane fade {% if forloop.first %}show active{% endif %}" id="{{ category.name|slugify }}">
-        <div class="row">
-            {% for meal in menu_items %}
-            {% if meal.category == category %}
-            <div class="col-md-4">
-                <div class="card">
-                    <img src="{{ meal.image.url }}" class="card-img-top" alt="{{ meal.name }}">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ meal.name }}</h5>
-                        <p class="card-text">{{ meal.description }}</p>
-                        <p><strong>Price:</strong> £{{ meal.price }}</p>
-                        <p><strong>Spice Level:</strong> {{ meal.get_spiciness_level_display }}</p>
-                        {% if meal.vegan %} <span class="badge bg-success">Vegan</span> {% endif %}
-                        {% if meal.gluten_free %} <span class="badge bg-warning">Gluten Free</span> {% endif %}
+    <!-- Tab Content -->
+    <div class="tab-content mt-3">
+        {% for category in categories %}
+        <div class="tab-pane fade {% if forloop.first %}show active{% endif %}" id="{{ category.name|slugify }}">
+            <div class="container">
+                {% for meal in menu_items %}
+                {% if meal.category == category %}
+                <div class="row align-items-center py-3 border-bottom">
+                    <!-- Image -->
+                    <div class="col-md-2 text-center">
+                        <img src="{{ item.image.url }}" alt="{{ item.name }}" class="img-fluid rounded" style="max-width: 120px; height: auto;">
                     </div>
-                </div>
-            </div>
-            {% endif %}
-            {% endfor %}
-        </div>
-    </div>
-    {% endfor %}
-</div>
+                    <!-- <img src="{% static 'images/menu_images/' %}{{ item.image_filename }}" alt="{{ item.name }}"> -->
+                    
+
 
     
+                    <!-- Text Content -->
+                    <div class="col-md-7">
+                        <h5 class="mb-1">{{ meal.name }}</h5>
+                        <p class="text-muted mb-2">{{ meal.description }}</p>
+                        
+                        <!-- Spice Level -->
+                        <p class="mb-1"><strong>Spice Level:</strong> {{ meal.get_spiciness_level_display }}</p>
+                        
+                        <!-- Dietary Badges -->
+                        {% if meal.vegan %}
+                            <span class="badge bg-success">Vegan</span>
+                        {% endif %}
+                        {% if meal.gluten_free %}
+                            <span class="badge bg-warning">Gluten Free</span>
+                        {% endif %}
+                    </div>
+    
+                    <!-- Price (Right-Aligned) -->
+                    <div class="col-md-3 text-end">
+                        <span class="fs-5 px-3 py-2">£{{ meal.price }}</span>
+                    </div>
+                </div>
+                {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    
+
 </div>
 
-
-
 {% endblock %}
-
-
-
-
-
-
-
-
-
