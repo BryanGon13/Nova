@@ -36,15 +36,17 @@
                 <div class="row align-items-center py-3 border-bottom">
                     <!-- Image -->
                     <div class="col-md-2 text-center">
-                        <img src="{{ menu_item.image.url }}" alt="{{ menu_item.name }} Image" class="img-fluid rounded" style="max-width: 120px; height: auto;">
+                        <img 
+                            src="{{ meal.image.url }}" 
+                            alt="{{ meal.name }}" 
+                            class="img-fluid rounded" 
+                            style="max-width: 120px; height: auto;"
+                            data-bs-toggle="modal" 
+                            data-bs-target="#imageModal"
+                            data-bs-src="{{ meal.image.url }}"
+                            data-bs-title="{{ meal.name }}">
                     </div>
-                    <!-- <img src="{% static 'images/menu_images/' %}{{ item.image_filename }}" alt="{{ item.name }}"> -->
-                    
 
-
-
-
-    
                     <!-- Text Content -->
                     <div class="col-md-7">
                         <h5 class="mb-1">{{ meal.name }}</h5>
@@ -61,9 +63,9 @@
                             <span class="badge bg-warning">Gluten Free</span>
                         {% endif %}
                     </div>
-    
+
                     <!-- Price (Right-Aligned) -->
-                    <div class="col-md-3 text-end">
+                    <div class="col-md-3">
                         <span class="fs-5 px-3 py-2">£{{ meal.price }}</span>
                     </div>
                 </div>
@@ -76,5 +78,37 @@
     
 
 </div>
+
+<!-- Modal Structure -->
+<div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="imageModalLabel">Menu Image</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-center">
+        <img id="modalImage" src="" alt="Menu Image" class="img-fluid">
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+    const modal = document.getElementById('imageModal');
+    modal.addEventListener('show.bs.modal', function (event) {
+        const button = event.relatedTarget; // The clicked image
+        const imageUrl = button.getAttribute('data-bs-src'); // Get the image URL
+        const title = button.getAttribute('data-bs-title'); // Get the meal name
+
+        // Find the modal image and set its source to the clicked image
+        const modalImage = document.getElementById('modalImage');
+        modalImage.src = imageUrl;
+
+        // Find the modal title and update it with the meal name
+        const modalTitle = document.getElementById('imageModalLabel');
+        modalTitle.textContent = title;
+    });
+</script>
 
 {% endblock %}
