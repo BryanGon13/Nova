@@ -1,6 +1,10 @@
 /* General Styles */
 body {
-    background-color: #F9FAFC;
+    background-color: #2B2B2B;
+    color: #E6E6E6; /* Light text for readability */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
 /* Branding */
@@ -25,9 +29,10 @@ body {
 }
 
 /* Navbar */
-#header-clr-container{
+#header-clr-container {
     max-height: 67px;
 }
+
 .navbar {
     margin-bottom: 20px;
 }
@@ -37,7 +42,7 @@ body {
     right: 0; 
     left: auto;  
     transition: all 0.3s ease-in-out;  
-    border-radius: 0px !important;
+    border-radius: 0 !important;
 }
 
 .logo {
@@ -50,8 +55,34 @@ body {
     transform: translateX(0);
 }
 
-.offcanvas-body{
+.offcanvas-body {
     text-align: center;
+}
+
+/* Header Styling */
+.custom-header-bg {
+    background-color: #1C1C1E; /* Deep Charcoal */
+}
+
+/* Gold Accent for Navbar Links */
+.text-gold {
+    color: #C9A66B !important;  /* Gold */
+    transition: color 0.3s ease-in-out;
+}
+
+.text-gold:hover {
+    color: #E6C07B !important;  /* Slightly lighter gold on hover */
+}
+
+/* Navbar Toggle Button */
+.navbar-toggler {
+    color: white;
+    border: none;
+}
+
+/* Adjust Logo Size */
+.logo {
+    max-height: 50px;
 }
 
 /* Buttons */
@@ -66,66 +97,146 @@ body {
     color: #23BBBB;
 }
 
-/* Footer */
-/* To position the footer at the bottom of the page */
-body {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
+/* =========================
+   Hero Section - Adjustments
+   ========================= */
+   .hero {
+    position: relative; /* Allows text overlay */
+    width: 100vw; /* Ensures full width */
+    overflow: hidden; /* Prevents unwanted scroll */
 }
 
-main {
-    flex-grow: 1; /* This allows the main content to grow and push footer to the bottom */
+/* Hero Image - Full Width */
+.hero-image {
+    width: 100vw; /* Makes sure it spans the whole screen */
+    height: 90vh; /* Keeps proportion */
+    object-fit: cover; /* Ensures proper cropping */
 }
 
+/* Hero Text - Increased Width */
+.hero-text {
+    position: absolute;
+    top: 65%;
+    right: 3%; /* Slightly closer to edge */
+    transform: translateY(-50%);
+    text-align: right;
+    max-width: 50%; /* Increased width for better readability */
+}
+
+/* Headings - Larger and More Spaced */
+.hero-text h1 {
+    font-size: 3rem; /* Larger for better emphasis */
+    font-weight: 700;
+    color: #FFFFFF;
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.6);
+    margin-bottom: 10px; /* Adds spacing */
+}
+
+/* Paragraph - Better Readability */
+.hero-text p {
+    font-size: 1.4rem;
+    color: #EAEAEA;
+    text-shadow: 1px 1px 8px rgba(0, 0, 0, 0.5);
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+/* Button Styling */
+.hero-text .btn {
+    background-color: #C9A66B;
+    color: #1C1C1E;
+    font-weight: bold;
+    transition: all 0.3s ease-in-out;
+    padding: 12px 20px;
+    font-size: 1.2rem;
+}
+
+.hero-text .btn:hover {
+    background-color: #E6C07B;
+    box-shadow: 0px 0px 10px rgba(201, 166, 107, 0.6);
+}
+
+/* =========================
+   Responsive Adjustments
+   ========================= */
+@media (max-width: 992px) {
+    .hero-text {
+        right: 5%;
+        max-width: 60%; /* More space on medium screens */
+    }
+
+    .hero-text h1 {
+        font-size: 2.5rem;
+    }
+
+    .hero-text p {
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero-text {
+        left: 5%;
+        right: auto;
+        max-width: 90%;
+        text-align: center !important;
+    }
+
+    .hero-text h1 {
+        font-size: 2rem;
+    }
+
+    .hero-text p {
+        font-size: 1rem;
+    }
+}
+
+
+/* Footer Styling */
 footer {
-    background-color: #212529; /* Dark background to match the header */
-    color: white; /* White text */
-    padding-top: 20px;
-    padding-bottom: 20px;
-    border-top: 1px solid #444; /* Similar to the border-bottom of the header */
+    background-color: #1C1C1E;  /* Deep Charcoal */
+    color: white;  /* White text */
+    padding: 20px 0;
+    border-top: 2px solid #8C6A4F;  /* Bronze Accent */
+    text-align: center;
 }
 
-footer .container {
-    max-width: 100%; /* Full-width for container */
+/* Footer Navigation Links */
+.footer-link {
+    color: #C9A66B !important;
+    text-decoration: none;
+    margin: 0 10px;
+    transition: color 0.3s ease-in-out;
 }
 
-footer .nav {
-    justify-content: flex-end;
+.footer-link:hover {
+    color: #E6C07B !important;  /* Lighter Gold */
 }
 
-footer .nav a {
-    color: white; /* White icon color */
+/* Footer Social Media Icons */
+.social-icon i {
+    font-size: 24px;
+    color: #C9A66B;
+    transition: color 0.3s ease-in-out, transform 0.3s ease-in-out;
 }
 
-footer .nav a:hover {
-    color: #00b4d8; /* Change icon color on hover */
+.social-icon:hover i {
+    color: #E6C07B;
+    transform: scale(1.1);  /* Slight pop effect */
 }
 
-footer svg {
-    fill: white;
+/* Footer Logo */
+.footer-logo {
+    max-height: 40px;
 }
 
-footer .col-md-4 {
-    display: flex;
-    align-items: center;
+/* Position footer at the bottom */
+main {
+    flex-grow: 1;
 }
 
-footer .col-md-4 span {
-    color: white;
-}
-
-footer .col-md-4 .text-body-secondary {
-    color: #6c757d;
-}
-
-
-
-
-
-/* Menu Page styling */
-
-.intro-text{
+/* Menu Page Styling */
+.intro-text {
     margin-bottom: 40px;
     text-align: center;
 }
@@ -134,4 +245,33 @@ footer .col-md-4 .text-body-secondary {
     max-width: 550px;
     text-align: center;
     margin: 20px auto 0 auto;
+}
+
+/* Offcanvas Menu */
+.offcanvas {
+    background-color: #1C1C1E !important;  /* Consistent dark theme */
+}
+
+.offcanvas-body .nav-link {
+    color: #C9A66B !important;
+    font-size: 1.1rem;
+    font-weight: 500;
+    transition: color 0.3s ease-in-out;
+}
+
+.offcanvas-body .nav-link:hover {
+    color: #E6C07B !important;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .footer-link {
+        display: block;
+        text-align: center;
+        margin-bottom: 10px;
+    }
+    
+    .nav.col-md-4 {
+        justify-content: center !important;
+    }
 }

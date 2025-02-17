@@ -1,32 +1,21 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block content %}
 
 <main>
 
-    <div id="myCarousel" class="carousel slide mb-6" data-bs-ride="carousel">
-        <!-- Remove carousel indicators -->
-        <div class="carousel-inner">
-          <!-- Only show the first carousel item (remove the rest) -->
-          <div class="carousel-item active">
-            <img src="{{ MEDIA_URL }}/menu_images/martini.webp" alt="Nova Restaurant" class="d-block w-100" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
-              <rect width="100%" height="100%" fill="var(--bs-secondary-color)"></rect>
-            </svg>
-            <div class="container">
-              <div class="carousel-caption text-start">
-                <h1>Taste the Stars at Nova Restaurant</h1>
-                <p class="opacity-75">Embark on a culinary journey with dishes that are as out of this world as the stars themselves. Join us for an unforgettable dining experience.</p>
-                <p><a class="btn btn-lg btn-primary" href="#">Make a reservation today</a></p>
-              </div>
-            </div>
-          </div>
+    <div class="hero">
+        <img src="/media/menu_images/martini.webp" alt="Nova martini" class="hero-image">
+        <div class="hero-text">
+            <h1>Taste the Stars at Nova Restaurant</h1>
+            <p>Embark on a culinary journey with dishes that are as out of this world as the stars themselves.</p>
+            <a class="btn btn-lg btn-primary" href="{% url 'reservation:reservation_list' %}">Make a reservation today</a>
         </div>
-      
-        <!-- Remove carousel controls (previous and next buttons) -->
-      </div>
-      
-  
-  
+    </div>
+    
+    
+    
     <!-- Marketing messaging and featurettes
     ================================================== -->
     <!-- Wrap the rest of the page in another container to center all the content. -->
