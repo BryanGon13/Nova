@@ -94,8 +94,14 @@ TEMPLATES = [
 ]
 
 
-DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': 'dctqmaht5',
+    'API_KEY': '558315847531383',
+    'API_SECRET': 'uh_W9GYV5C-bF8ZOGwvqftr-pJc',
+}
 
+
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 
 WSGI_APPLICATION = 'nova.wsgi.application'
