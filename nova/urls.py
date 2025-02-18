@@ -4,6 +4,7 @@ from django.urls import path, include
 from django.contrib import admin
 
 urlpatterns = [
+    path("accounts/", include("allauth.urls")),
     path('admin/', admin.site.urls),
     path('summernote/', include('django_summernote.urls')),
     path('home/', include('home.urls', namespace='home')),
