@@ -10,6 +10,6 @@ urlpatterns = [
     path('menu/', include('menu.urls', namespace='menu')),
     path('reservations/', include('reservations.urls'), name='reservations-urls'),
     path('reviews/', include('reviews.urls', namespace='review')),
-    path('contact/', include('contact.urls')),
+    path('contact/', include('contact.urls', namespace='contact')),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

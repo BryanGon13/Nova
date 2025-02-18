@@ -1,6 +1,8 @@
 from django.urls import path
 from . import views
 
+app_name = 'contact'  # This must match the namespace in nova/urls.py
+
 urlpatterns = [
-    path('', views.about_us, name='aboutus'),  # URL for the about us page
+    path('', views.contact_page, name='contact_page'),  # Ensure this is correct
 ]
