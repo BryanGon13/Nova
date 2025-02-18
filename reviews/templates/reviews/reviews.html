@@ -41,15 +41,12 @@
                     </div>
                 </div>
 
-
-                
-                
             </div>
         </div>      
     </div>
 
-
-    <div class="container">
+    <!-- Leave a Review Section -->
+    <div class="container col-md-7 border shadow-lg p-3 mb-5 mt-5 bg-body-tertiary rounded">
         <div class="row justify-content-center align-items-center">
             <div class="col-md-8">
 
@@ -59,8 +56,9 @@
                     </div>
                 </div>
 
-                <!-- Review Form (Below reviews) -->
+                <!-- Conditionally display the Review Form -->
                 <div class="tab-content mt-3">
+                    {% if user.is_authenticated %}
                     <form method="POST">
                         {% csrf_token %}
     
@@ -92,6 +90,11 @@
                         </div>
     
                     </form>
+                    {% else %}
+                    <p class="text-center mt-3">
+                        Please <a href="{% url 'account_login' %}?next={{ request.path }}">log in</a> to leave a review.
+                    </p>
+                    {% endif %}
                 </div>
             </div>
         </div>      
@@ -99,4 +102,3 @@
 </div>
 
 {% endblock %}
-
