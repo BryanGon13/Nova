@@ -13,6 +13,10 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 from pathlib import Path
 import os
 import dj_database_url
+import cloudinary
+
+
+cloudinary.config(cloudinary_url=os.getenv("CLOUDINARY_URL"))
 
 # Load environment variables if the 'env.py' file exists
 if os.path.isfile('env.py'):
