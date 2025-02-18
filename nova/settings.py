@@ -24,7 +24,7 @@ TEMPLATES_DIR = BASE_DIR / 'templates'
 
 # Security settings
 SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-lto1!%_jr@pwm#@qhf@)l8c$*7!g*%&r8+s2e^pg00=cuw%ryi')
-DEBUG = os.environ.get('DEBUG', 'True') == 'False'
+DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 
 ALLOWED_HOSTS = [
     "127.0.0.1",
@@ -43,11 +43,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'cloudinary_storage',
     'django.contrib.sites',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
     'django_summernote',
+    'cloudinary',
     "django_bootstrap5",
     'reservations',
     'reviews',
@@ -92,6 +94,7 @@ TEMPLATES = [
 ]
 
 
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 
 
