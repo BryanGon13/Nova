@@ -34,20 +34,6 @@
                 {% for meal in menu_items %}
                 {% if meal.category == category %}
                 <div class="row align-items-center py-3 border shadow p-3 mb-5 bg-body-tertiary rounded">
-                    <!-- Image -->
-                    <div class="col-md-2 text-center">
-                        <img 
-                            src="{{ meal.image.url }}" 
-                            alt="{{ meal.name }}" 
-                            class="img-fluid rounded" 
-                            style="max-width: 120px; height: auto;"
-                            data-bs-toggle="modal" 
-                            data-bs-target="#imageModal"
-                            data-bs-src="{{ meal.image.url }}"
-                            data-bs-title="{{ meal.name }}">
-                    </div>
-                   
-
 
                     <!-- Text Content -->
                     <div class="col-md-8">
