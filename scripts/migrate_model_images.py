@@ -28,3 +28,4 @@ def upload_menu_images():
             print(f"Uploaded {file_name} to {new_url}\n")
     
     print("All menu_images have been uploaded to Cloudinary!")
+
