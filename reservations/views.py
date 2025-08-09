@@ -1,28 +1,74 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from .models import Reservation
 from .forms import ReservationForm
 
-def reservation_list(request):
-    reservation_details = {}  # Initialize it here for safety
 
+@login_required
+def reservation_list(request):
+    # Create
     if request.method == "POST":
         form = ReservationForm(request.POST)
         if form.is_valid():
-            reservation = form.save()  # Save to the database
-            reservation_details = {
-                'name': reservation.name,
-                'date': reservation.date.strftime('%A, %B %d, %Y'),  # Example: "Saturday, February 17, 2025"
-                'time': reservation.time.strftime('%I:%M %p'),  # Example: "07:30 PM"
-                'people': reservation.number_of_people
-            }
-            form = ReservationForm()  # Reset form after successful booking
-            # Redirect to the same page to avoid resubmitting the form when reloading
+            reservation = form.save(commit=False)
+            reservation.user = request.user  # link to owner
+            reservation.save()
+            messages.success(request, "Your reservation was created successfully.")
             return redirect('reservation:reservation_list')
-
     else:
         form = ReservationForm()
 
-    # Fetch all reservations from the database
-    reservations = Reservation.objects.all()
+    # Read (only the current user's reservations)
+    reservations = (
+        Reservation.objects.filter(user=request.user)
+        .order_by('-date', '-time')
+    )
 
-    return render(request, 'reservations/reservation_list.html', {'form': form, 'reservations': reservations, 'reservation_details': reservation_details})
+    return render(
+        request,
+        'reservations/reservation_list.html',
+        {
+            'form': form,
+            'reservations': reservations,
+            'reservation_details': {},  # kept for template compatibility
+        },
+    )
+
+
+@login_required
+def reservation_update(request, pk):
+    # Only allow the owner to update
+    reservation = get_object_or_404(Reservation, pk=pk, user=request.user)
+
+    if request.method == "POST":
+        form = ReservationForm(request.POST, instance=reservation)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Reservation updated.")
+            return redirect('reservation:reservation_list')
+    else:
+        form = ReservationForm(instance=reservation)
+
+    return render(
+        request,
+        'reservations/reservation_form.html',
+        {'form': form, 'object': reservation},
+    )
+
+
+@login_required
+def reservation_delete(request, pk):
+    # Only allow the owner to delete
+    reservation = get_object_or_404(Reservation, pk=pk, user=request.user)
+
+    if request.method == "POST":
+        reservation.delete()
+        messages.success(request, "Reservation deleted.")
+        return redirect('reservation:reservation_list')
+
+    return render(
+        request,
+        'reservations/reservation_confirm_delete.html',
+        {'object': reservation},
+    )
