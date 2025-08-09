@@ -2,7 +2,6 @@
 {% load static %}
 
 {% block content %}
-
 <div class="container-fluid">
 
     <!-- Intro Section -->
@@ -10,12 +9,20 @@
         <div class="col-12 intro-text text-center mt-5">
             <h1>Customer Reviews</h1>
             <p>
-                Hear from our customers and discover why our services are truly out of this world! 
+                Hear from our customers and discover why our services are truly out of this world!
                 Read reviews, check ratings, and find out what makes us a favorite.
             </p>
         </div>
     </div>
-    
+
+    {% if messages %}
+    <div class="container mt-3">
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} mb-2" role="alert">{{ message }}</div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
     <div class="container">
         <div class="row justify-content-center align-items-center">
             <div class="col-md-8">
@@ -25,70 +32,87 @@
                     <div class="tab-pane fade show active" id="reviews">
                         {% for review in reviews %}
                         <div class="row align-items-center py-3 border-bottom">
-
-                            <!-- Review Content -->
                             <div class="col-md-12 border shadow-lg p-3 mb-5 bg-body-tertiary rounded">
-                                
-                                <p class="mb-4 mt-4"><strong>Rating:</strong> {{ review.get_rating_display|safe }} </p>
+                                <p class="mb-4 mt-4"><strong>Rating:</strong> {{ review.get_rating_display|safe }}</p>
                                 <h5 class="mb-4 text-center">{{ review.title }}</h5>
                                 <p class="text-muted mb-4 text-justify">{{ review.body|safe }}</p>
                                 <p class="mb-1 card-text text-muted h6 text-end">By {{ review.author.username }}</p>
-                                <p class="mb-4 card-text text-muted h6 text-end">on {{ review.created_on|date:"F j, Y" }}</p>
-                                
+                                <p class="mb-4 card-text text-muted h6 text-end">on {{ review.created_on|date:"F j, Y"
+                                    }}</p>
+
+                                {% if user.is_authenticated and user.id == review.author_id %}
+                                <div class="text-end">
+                                    <a href="{% url 'reviews:review_update' review.pk %}"
+                                        class="btn btn-sm btn-outline-primary">Edit</a>
+                                    <a href="{% url 'reviews:review_delete' review.pk %}"
+                                        class="btn btn-sm btn-outline-danger">Delete</a>
+                                </div>
+                                {% endif %}
                             </div>
                         </div>
+                        {% empty %}
+                        <p>No reviews yet.</p>
                         {% endfor %}
                     </div>
                 </div>
 
             </div>
-        </div>      
+        </div>
     </div>
 
     <!-- Leave a Review Section -->
     <div class="container col-md-7 border shadow-lg p-3 mb-5 mt-5 bg-body-tertiary rounded">
         <div class="row justify-content-center align-items-center">
             <div class="col-md-8">
-
                 <div class="row">
                     <div class="col-12 intro-text text-center mt-5">
                         <h1>Leave a Review</h1>
                     </div>
                 </div>
 
-                <!-- Conditionally display the Review Form -->
                 <div class="tab-content mt-3">
                     {% if user.is_authenticated %}
                     <form method="POST">
                         {% csrf_token %}
-    
+
+                        {% if form.non_field_errors %}
+                        <div class="alert alert-danger">
+                            {% for err in form.non_field_errors %}{{ err }}<br>{% endfor %}
+                        </div>
+                        {% endif %}
+
                         <div class="row mb-3">
                             <label for="{{ form.title.id_for_label }}" class="col-sm-2 col-form-label">Title</label>
                             <div class="col-sm-10">
                                 {{ form.title }}
+                                {% for err in form.title.errors %}<div class="text-danger small">{{ err }}</div>{%
+                                endfor %}
                             </div>
                         </div>
-    
+
                         <div class="row mb-3">
                             <label for="{{ form.rating.id_for_label }}" class="col-sm-2 col-form-label">Rating</label>
                             <div class="col-sm-10">
                                 {{ form.rating }}
+                                {% for err in form.rating.errors %}<div class="text-danger small">{{ err }}</div>{%
+                                endfor %}
                             </div>
                         </div>
-    
+
                         <div class="row mb-3">
                             <label for="{{ form.body.id_for_label }}" class="col-sm-2 col-form-label">Review</label>
                             <div class="col-sm-10">
                                 {{ form.body }}
+                                {% for err in form.body.errors %}<div class="text-danger small">{{ err }}</div>{% endfor
+                                %}
                             </div>
                         </div>
-    
+
                         <div class="row mb-3">
                             <div class="col text-center">
                                 <button type="submit" class="btn btn-primary">Submit Review</button>
                             </div>
                         </div>
-    
                     </form>
                     {% else %}
                     <p class="text-center mt-3">
@@ -96,9 +120,9 @@
                     </p>
                     {% endif %}
                 </div>
+
             </div>
-        </div>      
+        </div>
     </div>
 </div>
-
 {% endblock %}

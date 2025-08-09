@@ -1,9 +1,10 @@
 from django.urls import path
-from .views import submit_review
-
+from . import views
 
 app_name = 'reviews'
 
 urlpatterns = [
-    path('', submit_review, name='review_list'),  # Correct view name here
+    path('', views.review_list, name='review_list'),
+    path('<int:pk>/edit/', views.review_update, name='review_update'),
+    path('<int:pk>/delete/', views.review_delete, name='review_delete'),
 ]
