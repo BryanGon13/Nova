@@ -5,6 +5,13 @@ from datetime import date, time as dtime
 from .models import Reservation
 
 
+OPENING_MSG = (
+    "Our opening hours are 08:00 to 23:00. "
+    "Please choose a reservation time on the hour or half-hour "
+    "(e.g., 08:00, 08:30, 09:00). The last available booking is at 22:30."
+)
+
+
 class ReservationForm(forms.ModelForm):
     class Meta:
         model = Reservation
@@ -21,10 +28,10 @@ class ReservationForm(forms.ModelForm):
                     "type": "time",
                     "class": "form-control",
                     "min": "08:00",
-                    "max": "22:30",   # last slot
-                    "step": "1800",   # 30 min in seconds
-    }
-),
+                    "max": "22:30",   # last valid start time
+                    "step": "1800",   # 30 minutes
+                }
+            ),
             "number_of_people": forms.NumberInput(attrs={"class": "form-control", "min": 1}),
         }
 
@@ -38,22 +45,22 @@ class ReservationForm(forms.ModelForm):
 
     def clean_time(self):
         """
-        Only allow 30-minute slots between 08:00 and 23:00 (inclusive bound),
-        but with last valid *start* time at 22:30. So 23:00 is NOT valid.
+        Only allow 30-minute slots between 08:00 and 23:00 (inclusive window),
+        with the last valid *start* time at 22:30. So 23:00 is not a valid start.
         """
         t = self.cleaned_data["time"]
 
-        # Must be on 00 or 30 minutes exactly
+        # Must be exactly on 00 or 30
         if t.minute not in (0, 30) or t.second != 0 or t.microsecond != 0:
-            raise ValidationError("Please choose a time in 30‑minute steps (e.g., 08:00, 08:30, 09:00).")
+            raise ValidationError(OPENING_MSG)
 
         # Earliest 08:00
-        if t < dtime(hour=8, minute=0):
-            raise ValidationError("We accept reservations from 08:00 onwards.")
+        if t < dtime(8, 0):
+            raise ValidationError(OPENING_MSG)
 
-        # Latest start 22:30 (so 23:00 is invalid)
-        if t > dtime(hour=22, minute=30):
-            raise ValidationError("The last available time is 22:30.")
+        # Latest start 22:30 (23:00 would be outside)
+        if t > dtime(22, 30):
+            raise ValidationError(OPENING_MSG)
 
         return t
 
