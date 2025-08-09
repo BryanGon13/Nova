@@ -17,7 +17,7 @@ def reservation_list(request):
             }
             form = ReservationForm()  # Reset form after successful booking
             # Redirect to the same page to avoid resubmitting the form when reloading
-            return redirect('reservation_list')
+            return redirect('reservation:reservation_list')
 
     else:
         form = ReservationForm()
