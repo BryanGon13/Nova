@@ -10,13 +10,12 @@
             <h1>Make a Reservation</h1>
             <p>
                 Secure your spot for an extraordinary dining experience. Whether it's an intimate soirée, a refined
-                family gathering,
-                or a celebration of life's finest moments, allow us to craft an impeccable evening for you.
+                family gathering, or a celebration of life's finest moments, allow us to craft an impeccable evening for
+                you.
             </p>
         </div>
     </div>
 
-    <!-- Optional: show Django messages if not already in base.html -->
     {% if messages %}
     <div class="container mt-3">
         {% for message in messages %}
@@ -31,7 +30,6 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
 
-                <!-- Confirmation Message (only visible after booking, if you keep using it) -->
                 {% if reservation_details %}
                 <div class="alert alert-success text-center" role="alert">
                     <h4 class="alert-heading">Reservation Confirmed</h4>
@@ -43,8 +41,10 @@
                     </p>
                     <p>We eagerly anticipate welcoming you to Nova.</p>
                     <hr>
-                    <p class="mb-0"><em>Should you require any modifications to your reservation, please do not hesitate
-                            to contact us.</em></p>
+                    <p class="mb-0">
+                        <em>Should you require any modifications to your reservation, please do not hesitate to contact
+                            us.</em>
+                    </p>
                 </div>
                 {% endif %}
 
@@ -52,10 +52,19 @@
                 <form method="post" action="{% url 'reservation:reservation_list' %}">
                     {% csrf_token %}
 
+                    {% if form.non_field_errors %}
+                    <div class="alert alert-danger">
+                        {% for err in form.non_field_errors %}{{ err }}<br>{% endfor %}
+                    </div>
+                    {% endif %}
+
                     <div class="row mb-3">
                         <label for="{{ form.name.id_for_label }}" class="col-sm-3 col-form-label">Name</label>
                         <div class="col-sm-9">
                             {{ form.name }}
+                            {% for err in form.name.errors %}
+                            <div class="text-danger small">{{ err }}</div>
+                            {% endfor %}
                         </div>
                     </div>
 
@@ -63,6 +72,9 @@
                         <label for="{{ form.phone.id_for_label }}" class="col-sm-3 col-form-label">Phone</label>
                         <div class="col-sm-9">
                             {{ form.phone }}
+                            {% for err in form.phone.errors %}
+                            <div class="text-danger small">{{ err }}</div>
+                            {% endfor %}
                         </div>
                     </div>
 
@@ -70,6 +82,9 @@
                         <label for="{{ form.email.id_for_label }}" class="col-sm-3 col-form-label">Email</label>
                         <div class="col-sm-9">
                             {{ form.email }}
+                            {% for err in form.email.errors %}
+                            <div class="text-danger small">{{ err }}</div>
+                            {% endfor %}
                         </div>
                     </div>
 
@@ -77,6 +92,9 @@
                         <label for="{{ form.date.id_for_label }}" class="col-sm-3 col-form-label">Date</label>
                         <div class="col-sm-9">
                             {{ form.date }}
+                            {% for err in form.date.errors %}
+                            <div class="text-danger small">{{ err }}</div>
+                            {% endfor %}
                         </div>
                     </div>
 
@@ -84,14 +102,21 @@
                         <label for="{{ form.time.id_for_label }}" class="col-sm-3 col-form-label">Time</label>
                         <div class="col-sm-9">
                             {{ form.time }}
+                            {% for err in form.time.errors %}
+                            <div class="text-danger small">{{ err }}</div>
+                            {% endfor %}
                         </div>
                     </div>
 
                     <div class="row mb-3">
-                        <label for="{{ form.number_of_people.id_for_label }}" class="col-sm-3 col-form-label">Number of
-                            Guests</label>
+                        <label for="{{ form.number_of_people.id_for_label }}" class="col-sm-3 col-form-label">
+                            Number of Guests
+                        </label>
                         <div class="col-sm-9">
                             {{ form.number_of_people }}
+                            {% for err in form.number_of_people.errors %}
+                            <div class="text-danger small">{{ err }}</div>
+                            {% endfor %}
                         </div>
                     </div>
 
