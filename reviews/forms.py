@@ -8,7 +8,7 @@ class ReviewForm(forms.ModelForm):
         fields = ["title", "rating", "body"]
         widgets = {
             "title": forms.TextInput(attrs={"class": "form-control"}),
-            "rating": forms.NumberInput(attrs={"class": "form-control", "min": 1, "max": 5}),
+            "rating": forms.Select(attrs={"class": "form-control"}),
             "body": forms.Textarea(attrs={"class": "form-control", "rows": 4}),
         }
 
