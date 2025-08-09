@@ -7,37 +7,60 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='About_Us',
+            name="About_Us",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=100)),
-                ('content', models.TextField()),
-                ('image', models.ImageField(upload_to='aboutus_images/')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=100)),
+                ("content", models.TextField()),
+                ("image", models.ImageField(upload_to="aboutus_images/")),
             ],
         ),
         migrations.CreateModel(
-            name='Awards',
+            name="Awards",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('organization', models.CharField(max_length=500)),
-                ('title', models.CharField(max_length=500)),
-                ('year_awarded', models.PositiveIntegerField()),
-                ('description', models.TextField()),
-                ('image', models.ImageField(upload_to='award_images/')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("organization", models.CharField(max_length=500)),
+                ("title", models.CharField(max_length=500)),
+                ("year_awarded", models.PositiveIntegerField()),
+                ("description", models.TextField()),
+                ("image", models.ImageField(upload_to="award_images/")),
             ],
         ),
         migrations.CreateModel(
-            name='Core_Values',
+            name="Core_Values",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('image', models.ImageField(upload_to='values_images/')),
-                ('name', models.CharField(max_length=100)),
-                ('content', models.TextField()),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("image", models.ImageField(upload_to="values_images/")),
+                ("name", models.CharField(max_length=100)),
+                ("content", models.TextField()),
             ],
         ),
     ]

@@ -1,7 +1,8 @@
-from django.db import models
 from django.contrib.auth.models import User
+from django.db import models
 
 # Create your models here.
+
 
 class About_Us(models.Model):
     name = models.CharField(max_length=100)
@@ -11,6 +12,7 @@ class About_Us(models.Model):
     def __str__(self):
         return self.name
 
+
 class Core_Values(models.Model):
     image = models.ImageField(upload_to="values_images/")
     name = models.CharField(max_length=100)
@@ -18,6 +20,7 @@ class Core_Values(models.Model):
 
     def __str__(self):
         return self.name
+
 
 class Awards(models.Model):
     organization = models.CharField(max_length=500)

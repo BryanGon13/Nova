@@ -1,7 +1,8 @@
 # reviews/tests.py
+from django.contrib.auth.models import User
 from django.test import TestCase
 from django.urls import reverse
-from django.contrib.auth.models import User
+
 from .models import Review
 
 
@@ -26,11 +27,9 @@ class ReviewCRUDTests(TestCase):
 
     # --- Create ---
     def test_create_requires_login(self):
-        resp = self.client.post(self.list_url, {
-            "title": "Anon Review",
-            "rating": 4,
-            "body": "Nice."
-        })
+        resp = self.client.post(
+            self.list_url, {"title": "Anon Review", "rating": 4, "body": "Nice."}
+        )
         # Should redirect to login
         self.assertEqual(resp.status_code, 302)
         self.assertIn(reverse("account_login"), resp["Location"])
@@ -38,11 +37,9 @@ class ReviewCRUDTests(TestCase):
 
     def test_create_success(self):
         self.client.login(username="owner", password="pass12345")
-        resp = self.client.post(self.list_url, {
-            "title": "New Review",
-            "rating": 4,
-            "body": "Pretty good!"
-        })
+        resp = self.client.post(
+            self.list_url, {"title": "New Review", "rating": 4, "body": "Pretty good!"}
+        )
         # View redirects back to list on success
         self.assertEqual(resp.status_code, 302)
         self.assertEqual(resp.url, self.list_url)
@@ -61,11 +58,10 @@ class ReviewCRUDTests(TestCase):
     # --- Update ---
     def test_update_by_owner(self):
         self.client.login(username="owner", password="pass12345")
-        resp = self.client.post(self.update_url, {
-            "title": "Updated Title",
-            "rating": 3,
-            "body": "It was fine."
-        })
+        resp = self.client.post(
+            self.update_url,
+            {"title": "Updated Title", "rating": 3, "body": "It was fine."},
+        )
         self.assertEqual(resp.status_code, 302)
         self.assertEqual(resp.url, self.list_url)
         self.review.refresh_from_db()
@@ -76,11 +72,9 @@ class ReviewCRUDTests(TestCase):
     def test_update_by_non_owner_redirects(self):
         self.client.login(username="other", password="pass12345")
         original_title = self.review.title
-        resp = self.client.post(self.update_url, {
-            "title": "Hacked Title",
-            "rating": 1,
-            "body": "Nope."
-        })
+        resp = self.client.post(
+            self.update_url, {"title": "Hacked Title", "rating": 1, "body": "Nope."}
+        )
         # Your view redirects to list with an error message
         self.assertEqual(resp.status_code, 302)
         self.assertEqual(resp.url, self.list_url)

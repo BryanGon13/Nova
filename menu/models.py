@@ -1,13 +1,15 @@
-from django.db import models
 from django.contrib.auth.models import User
+from django.db import models
 
 # Create your models here.
+
 
 class Category(models.Model):
     name = models.CharField(max_length=50)
 
     def __str__(self):
         return self.name
+
 
 class Menu(models.Model):
     SPICE_LEVEL_CHOICES = [
@@ -17,7 +19,9 @@ class Menu(models.Model):
         (3, "Hot 🌶️🌶️🌶️"),
     ]
 
-    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name="menus", null=True, blank=True)
+    category = models.ForeignKey(
+        Category, on_delete=models.CASCADE, related_name="menus", null=True, blank=True
+    )
     name = models.CharField(max_length=100)
     price = models.DecimalField(max_digits=4, decimal_places=2)
     description = models.TextField(max_length=1000)
@@ -25,11 +29,7 @@ class Menu(models.Model):
     vegan = models.BooleanField(default=False)
     gluten_free = models.BooleanField(default=False)
     allergens = models.TextField(blank=True, null=True)
-    image = models.ImageField(upload_to='menu_images/') 
-
-    
-
-    
+    image = models.ImageField(upload_to="menu_images/")
 
     def __str__(self):
         return f"[{self.category}] - {self.name}"

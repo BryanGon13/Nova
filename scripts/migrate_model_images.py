@@ -1,8 +1,10 @@
 # migrate_menu_images.py
 
 import os
+
 import cloudinary.uploader
 from django.conf import settings
+
 
 def upload_menu_images():
     """
@@ -10,7 +12,7 @@ def upload_menu_images():
     and print out their new Cloudinary URLs.
     """
     # Path to your local folder
-    local_folder = os.path.join(settings.BASE_DIR, 'nova', 'media', 'menu_images')
+    local_folder = os.path.join(settings.BASE_DIR, "nova", "media", "menu_images")
 
     # Iterate over each file in the folder
     for file_name in os.listdir(local_folder):
@@ -24,8 +26,7 @@ def upload_menu_images():
             result = cloudinary.uploader.upload(full_path)
 
             # Print the new URL so you can update references in your HTML
-            new_url = result['secure_url']
+            new_url = result["secure_url"]
             print(f"Uploaded {file_name} to {new_url}\n")
-    
-    print("All menu_images have been uploaded to Cloudinary!")
 
+    print("All menu_images have been uploaded to Cloudinary!")

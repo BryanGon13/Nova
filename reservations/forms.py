@@ -1,9 +1,11 @@
 # reservations/forms.py
+from datetime import date
+from datetime import time as dtime
+
 from django import forms
 from django.core.exceptions import ValidationError
-from datetime import date, time as dtime
-from .models import Reservation
 
+from .models import Reservation
 
 OPENING_MSG = (
     "Our opening hours are 08:00 to 23:00. "
@@ -19,7 +21,9 @@ class ReservationForm(forms.ModelForm):
         widgets = {
             "name": forms.TextInput(attrs={"class": "form-control"}),
             # Keep TextInput for better UX; we'll validate in clean_phone()
-            "phone": forms.TextInput(attrs={"class": "form-control", "inputmode": "numeric"}),
+            "phone": forms.TextInput(
+                attrs={"class": "form-control", "inputmode": "numeric"}
+            ),
             "email": forms.EmailInput(attrs={"class": "form-control"}),
             # HTML5 inputs help, but server-side validation is the source of truth
             "date": forms.DateInput(attrs={"type": "date", "class": "form-control"}),
@@ -28,11 +32,13 @@ class ReservationForm(forms.ModelForm):
                     "type": "time",
                     "class": "form-control",
                     "min": "08:00",
-                    "max": "22:30",   # last valid start time
-                    "step": "1800",   # 30 minutes
+                    "max": "22:30",  # last valid start time
+                    "step": "1800",  # 30 minutes
                 }
             ),
-            "number_of_people": forms.NumberInput(attrs={"class": "form-control", "min": 1}),
+            "number_of_people": forms.NumberInput(
+                attrs={"class": "form-control", "min": 1}
+            ),
         }
 
     # --- Validations ---

@@ -1,8 +1,10 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, redirect, get_object_or_404
-from .models import Review
+from django.shortcuts import get_object_or_404, redirect, render
+
 from .forms import ReviewForm
+from .models import Review
+
 
 def review_list(request):
     reviews = Review.objects.all()  # ordered by Meta
@@ -24,6 +26,7 @@ def review_list(request):
     # render your existing template name:
     return render(request, "reviews/reviews.html", {"form": form, "reviews": reviews})
 
+
 @login_required
 def review_update(request, pk):
     review = get_object_or_404(Review, pk=pk)
@@ -42,6 +45,7 @@ def review_update(request, pk):
     else:
         form = ReviewForm(instance=review)
     return render(request, "reviews/review_form.html", {"form": form, "object": review})
+
 
 @login_required
 def review_delete(request, pk):

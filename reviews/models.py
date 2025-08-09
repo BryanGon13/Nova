@@ -1,10 +1,11 @@
-from django.db import models
 from django.contrib.auth.models import User
+from django.db import models
 
 # Create your models here.
 
+
 class Review(models.Model):
-        
+
     STAR_RATINGS = [
         (1, "⭐☆☆☆☆"),
         (2, "⭐⭐☆☆☆"),
@@ -12,7 +13,7 @@ class Review(models.Model):
         (4, "⭐⭐⭐⭐☆"),
         (5, "⭐⭐⭐⭐⭐"),
     ]
-    
+
     # links the review to a user and deletes the review if the user is deleted.
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     rating = models.PositiveSmallIntegerField(choices=STAR_RATINGS)
@@ -22,7 +23,7 @@ class Review(models.Model):
 
     # posts will now be listed from oldest to newest creation time.
     class Meta:
-        ordering = ['-created_on']  
+        ordering = ["-created_on"]
 
     # now reviews will be displayed in a human.readable manner in the admin panel.
     def __str__(self):
