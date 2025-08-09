@@ -85,8 +85,9 @@
                             <label for="{{ form.title.id_for_label }}" class="col-sm-2 col-form-label">Title</label>
                             <div class="col-sm-10">
                                 {{ form.title }}
-                                {% for err in form.title.errors %}<div class="text-danger small">{{ err }}</div>{%
-                                endfor %}
+                                {% for err in form.title.errors %}
+                                <div class="text-danger small">{{ err }}</div>
+                                {% endfor %}
                             </div>
                         </div>
 
@@ -94,8 +95,9 @@
                             <label for="{{ form.rating.id_for_label }}" class="col-sm-2 col-form-label">Rating</label>
                             <div class="col-sm-10">
                                 {{ form.rating }}
-                                {% for err in form.rating.errors %}<div class="text-danger small">{{ err }}</div>{%
-                                endfor %}
+                                {% for err in form.rating.errors %}
+                                <div class="text-danger small">{{ err }}</div>
+                                {% endfor %}
                             </div>
                         </div>
 
@@ -103,8 +105,9 @@
                             <label for="{{ form.body.id_for_label }}" class="col-sm-2 col-form-label">Review</label>
                             <div class="col-sm-10">
                                 {{ form.body }}
-                                {% for err in form.body.errors %}<div class="text-danger small">{{ err }}</div>{% endfor
-                                %}
+                                {% for err in form.body.errors %}
+                                <div class="text-danger small">{{ err }}</div>
+                                {% endfor %}
                             </div>
                         </div>
 
