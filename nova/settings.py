@@ -4,10 +4,6 @@ from pathlib import Path
 import cloudinary
 import dj_database_url
 
-# Load environment variables if the 'env.py' file exists
-if os.path.isfile("env.py"):
-    import env
-
 # Cloudinary config (moved to env vars for security)
 cloudinary.config(
     cloud_name=os.getenv("CLOUD_NAME"),
@@ -119,7 +115,8 @@ CSRF_TRUSTED_ORIGINS = ["https://*.codeinstitute-ide.net/", "https://*.herokuapp
 # Password validation
 AUTH_PASSWORD_VALIDATORS = [
     {
-        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"
+        "NAME": "django.contrib.auth.password_validation."
+        "UserAttributeSimilarityValidator"
     },
     {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator"},
     {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator"},
