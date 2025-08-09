@@ -24,11 +24,11 @@
                 {% csrf_token %}
                 {{ form.as_p }}
                 {% if redirect_field_value %}
-                <input type="hidden" name=next value="{% url 'home:home' %}"/>
+                <input type="hidden" name=next value="{% url 'home:home' %}">
                 {% endif %}
                 <button class="btn btn-signup right" type="submit">{% trans "Sign In" %}</button>
             </form>
-        </div> 
+        </div>
 
     </div>
 </div>
