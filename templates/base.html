@@ -9,7 +9,7 @@
 
 <head>
     <title>Nova Restaurant</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -38,51 +38,47 @@
                 <a href="{% url 'home:home' %}" class="d-flex align-items-center text-white text-decoration-none">
                     <img src="{% static 'images/nova-logo-no-bg.png' %}" alt="Nova Logo" class="logo">
                 </a>
-    
+
                 <!-- Offcanvas Toggle Button -->
                 <button class="navbar-toggler border-0 text-white" type="button" data-bs-toggle="offcanvas"
-                    data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+                    data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
                     <i class="bi bi-list" style="font-size: 1.5rem;"></i>
                 </button>
             </div>
         </div>
-    
+
         <!-- Offcanvas Sidebar -->
-        <div class="offcanvas offcanvas-end custom-header-bg" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+        <div class="offcanvas offcanvas-end custom-header-bg" tabindex="-1" id="offcanvasNavbar"
+            aria-labelledby="offcanvasNavbarLabel">
             <div class="offcanvas-header">
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                <h5 class="offcanvas-title text-white" id="offcanvasNavbarLabel">Menu</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
+                    aria-label="Close"></button>
             </div>
             <div class="offcanvas-body">
                 <ul class="nav flex-column">
                     <li><a href="{% url 'home:home' %}" class="nav-link text-gold">Home</a></li>
                     <li><a href="{% url 'menu:menu' %}" class="nav-link text-gold">Menu</a></li>
-                    <li><a href="{% url 'reservation:reservation_list' %}" class="nav-link text-gold">Make a Reservation</a></li>
+                    <li><a href="{% url 'reservation:reservation_list' %}" class="nav-link text-gold">Make a
+                            Reservation</a></li>
                     <li><a href="{% url 'contact:contact_page' %}" class="nav-link text-gold">Find Us</a></li>
                     <li><a href="{% url 'reviews:review_list' %}" class="nav-link text-gold">Reviews</a></li>
                 </ul>
 
-                <div class="offcanvas-body text-center">
-                    <div class="d-flex justify-content-center gap-3"> 
+                <div class="text-center mt-4">
+                    <div class="d-flex justify-content-center gap-3">
                         {% if user.is_authenticated %}
-                        <a class="btn btn-outline-light fw-bold px-3 py-2" href="{% url 'account_logout' %}">
-                            Logout
-                        </a>
+                        <a class="btn btn-outline-light fw-bold px-3 py-2" href="{% url 'account_logout' %}">Logout</a>
                         {% else %}
-                        <a class="btn btn-warning fw-bold text-dark px-3 py-2" href="{% url 'account_signup' %}">
-                            Sign-up
-                        </a>
-                        <a class="btn btn-outline-light fw-bold px-3 py-2" href="{% url 'account_login' %}">
-                            Login
-                        </a>
+                        <a class="btn btn-warning fw-bold text-dark px-3 py-2"
+                            href="{% url 'account_signup' %}">Sign-up</a>
+                        <a class="btn btn-outline-light fw-bold px-3 py-2" href="{% url 'account_login' %}">Login</a>
                         {% endif %}
                     </div>
                 </div>
-                
-                
-
-                
+            </div> <!-- closes .offcanvas-body -->
+        </div> <!-- closes .offcanvas -->
     </header>
-    
 
     <main class="flex-shrink-0 main-bg">
         {% block content %}
@@ -94,7 +90,7 @@
     <footer class="custom-footer py-4">
         <div class="container">
             <div class="d-flex flex-wrap justify-content-between align-items-center">
-                
+
                 <!-- Logo & Copyright -->
                 <div class="col-md-4 d-flex align-items-center">
                     <a href="{% url 'home:home' %}" class="me-3">
@@ -102,24 +98,25 @@
                     </a>
                     <span class="text-gold">© 2024 Nova, Inc</span>
                 </div>
-    
+
                 <!-- Social Media Links -->
                 <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
-                    <li class="ms-3"><a href="https://twitter.com/?lang=en" target="_blank" class="social-icon"><i class="bi bi-twitter"></i></a></li>
-                    <li class="ms-3"><a href="https://www.instagram.com/" target="_blank" class="social-icon"><i class="bi bi-instagram"></i></a></li>
-                    <li class="ms-3"><a href="https://www.facebook.com/" target="_blank" class="social-icon"><i class="bi bi-facebook"></i></a></li>
+                    <li class="ms-3"><a href="https://twitter.com/?lang=en" target="_blank" class="social-icon"><i
+                                class="bi bi-twitter"></i></a></li>
+                    <li class="ms-3"><a href="https://www.instagram.com/" target="_blank" class="social-icon"><i
+                                class="bi bi-instagram"></i></a></li>
+                    <li class="ms-3"><a href="https://www.facebook.com/" target="_blank" class="social-icon"><i
+                                class="bi bi-facebook"></i></a></li>
                 </ul>
-    
+
             </div>
         </div>
     </footer>
-    
-    
 
     <!-- Bootstrap JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
     {% bootstrap_javascript %}
 
 </body>
+
 </html>
