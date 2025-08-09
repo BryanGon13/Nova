@@ -35,7 +35,12 @@
                             <div class="col-md-12 border shadow-lg p-3 mb-5 bg-body-tertiary rounded">
                                 <p class="mb-4 mt-4"><strong>Rating:</strong> {{ review.get_rating_display|safe }}</p>
                                 <h5 class="mb-4 text-center">{{ review.title }}</h5>
-                                <p class="text-muted mb-4 text-justify">{{ review.body|safe }}</p>
+
+                                <!-- FIX: don't wrap body in <p>; it already contains paragraphs -->
+                                <div class="text-muted mb-4 text-justify">
+                                    {{ review.body|safe }}
+                                </div>
+
                                 <p class="mb-1 card-text text-muted h6 text-end">By {{ review.author.username }}</p>
                                 <p class="mb-4 card-text text-muted h6 text-end">
                                     on {{ review.created_on|date:"F j, Y" }}
