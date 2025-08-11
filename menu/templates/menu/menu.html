@@ -37,15 +37,26 @@
                 {% if meal.category == category %}
                 <div class="row align-items-center py-3 border shadow p-3 mb-5 bg-body-tertiary rounded">
 
-                    <!-- Text Content -->
-                    <div class="col-md-8">
+                    <!-- Image (left) -->
+                    <div class="col-12 col-md-3 text-center mb-3 mb-md-0">
+                        {% if meal.image %}
+                        <img src="{{ meal.image.url }}" alt="{{ meal.name }}" class="img-fluid rounded"
+                            style="max-height: 140px; object-fit: cover;" loading="lazy" data-bs-toggle="modal"
+                            data-bs-target="#imageModal" data-bs-src="{{ meal.image.url }}"
+                            data-bs-title="{{ meal.name }}">
+                        {% else %}
+                        <img src="{% static 'images/placeholder.jpg' %}" alt="No image available"
+                            class="img-fluid rounded" style="max-height: 140px; object-fit: cover;" loading="lazy">
+                        {% endif %}
+                    </div>
+
+                    <!-- Text (middle) -->
+                    <div class="col-12 col-md-7">
                         <h5 class="mb-1">{{ meal.name }}</h5>
                         <p class="text-muted mb-2">{{ meal.description }}</p>
 
-                        <!-- Spice Level -->
                         <p class="mb-1"><strong>Spice Level:</strong> {{ meal.get_spiciness_level_display }}</p>
 
-                        <!-- Dietary Badges -->
                         {% if meal.vegan %}
                         <span class="badge bg-success">Vegan</span>
                         {% endif %}
@@ -54,8 +65,8 @@
                         {% endif %}
                     </div>
 
-                    <!-- Price (Right-Aligned) -->
-                    <div class="col-md-2">
+                    <!-- Price (right) -->
+                    <div class="col-12 col-md-2 text-md-end mt-3 mt-md-0">
                         <span class="fs-5 py-2">£{{ meal.price }}</span>
                     </div>
                 </div>
@@ -65,7 +76,6 @@
         </div>
         {% endfor %}
     </div>
-
 
 </div>
 
