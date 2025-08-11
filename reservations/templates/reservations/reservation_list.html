@@ -133,26 +133,28 @@
                 </form>
 
                 <!-- Reservation List with actions -->
-                <hr class="my-5">
-                <h2 class="text-center mb-4">Your Reservations</h2>
+                <div class="mb-5">
+                    <hr class="my-5">
+                    <h2 class="text-center mb-4">Your Reservations</h2>
 
-                <ul class="list-group">
-                    {% for r in reservations %}
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                        <span>
-                            {{ r.name }} — {{ r.number_of_people }} guests — {{ r.date }} {{ r.time }}
-                        </span>
-                        <span class="btn-group">
-                            <a href="{% url 'reservation:reservation_update' r.pk %}"
-                                class="btn btn-sm btn-outline-primary">Edit</a>
-                            <a href="{% url 'reservation:reservation_delete' r.pk %}"
-                                class="btn btn-sm btn-outline-danger">Delete</a>
-                        </span>
-                    </li>
-                    {% empty %}
-                    <li class="list-group-item">No reservations yet.</li>
-                    {% endfor %}
-                </ul>
+                    <ul class="list-group">
+                        {% for r in reservations %}
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <span>
+                                {{ r.name }} — {{ r.number_of_people }} guests — {{ r.date }} {{ r.time }}
+                            </span>
+                            <span class="btn-group">
+                                <a href="{% url 'reservation:reservation_update' r.pk %}"
+                                    class="btn btn-sm btn-outline-primary">Edit</a>
+                                <a href="{% url 'reservation:reservation_delete' r.pk %}"
+                                    class="btn btn-sm btn-outline-danger">Delete</a>
+                            </span>
+                        </li>
+                        {% empty %}
+                        <li class="list-group-item">No reservations yet.</li>
+                        {% endfor %}
+                    </ul>
+                </div>
 
             </div>
         </div>
