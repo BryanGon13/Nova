@@ -136,9 +136,19 @@ STATIC_URL = "static/"
 STATICFILES_DIRS = [BASE_DIR / "static"]
 STATIC_ROOT = os.path.join(BASE_DIR / "staticfiles")
 
-# Media files
-MEDIA_URL = "/media/"
-MEDIA_ROOT = os.path.join(BASE_DIR, "nova/media")
+# Media files (Cloudinary in prod, /media/ locally)
+CLOUD_NAME = os.getenv("CLOUD_NAME")
+
+# Use Cloudinary storage (you already have DEFAULT_FILE_STORAGE set above)
+if CLOUD_NAME:
+    # Let cloudinary_storage serve absolute URLs from your cloud
+    MEDIA_URL = f"https://res.cloudinary.com/{CLOUD_NAME}/"
+    # MEDIA_ROOT isn't used by Cloudinary, but keep it defined for local runs
+    MEDIA_ROOT = os.path.join(BASE_DIR, "nova/media")
+else:
+    # Local dev fallback
+    MEDIA_URL = "/media/"
+    MEDIA_ROOT = os.path.join(BASE_DIR, "nova/media")
 
 # Default primary key field type
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
