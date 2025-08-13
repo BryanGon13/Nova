@@ -177,85 +177,186 @@ The business model of Nova Restaurant is primarily service-based, centered aroun
 - [Heroku](https://www.heroku.com) - Was used for the hosting and deployment of the production website. Through development and deployment I have ensure the version deployed to Heroku is the same as the development codebase as it deploys directly from this repo on GitHub whenever a change is committed.
 
 
-# Deployment
+## Deployment
 
-## Local Deployment
+### Local Deployment
 
-1. **Clone the repository:** 
-  - git clone https://github.com/BryanGon13/Nova.git
+1. **Clone the repository:**
+    ```bash
+    git clone https://github.com/BryanGon13/Nova.git
+    ```
 
 2. **Create and activate a virtual environment:**
-  - source venv/bin/activate
+    ```bash
+    python3 -m venv venv
+    source venv/bin/activate
+    ```
 
-3.	**Install dependencies:**
-  - pip install -r requirements.txt
+3. **Install dependencies:**
+    ```bash
+    pip install -r requirements.txt
+    ```
 
-4.	**Create a .env file in the project root (do not commit this file) with the following variables:**
-  - SECRET_KEY=<your-secret-key>
-  - DATABASE_URL=sqlite:///db.sqlite3
-  - CLOUDINARY_URL=<your-cloudinary-url>
-  - DEBUG=True
+4. **Create a `.env` file in the project root (do not commit this file) with the following variables:**
+    ```
+    SECRET_KEY=<your-secret-key>
+    DATABASE_URL=sqlite:///db.sqlite3
+    CLOUDINARY_URL=<your-cloudinary-url>
+    DEBUG=True
+    ```
 
 5. **Run migrations:**
-  - python manage.py migrate
+    ```bash
+    python manage.py migrate
+    ```
 
 6. **Start the server:**
-  - python manage.py runserver
-  - Visit http://127.0.0.1:8000 to view the site locally.
+    ```bash
+    python manage.py runserver
+    ```
+    Visit [http://127.0.0.1:8000](http://127.0.0.1:8000) to view the site locally.
 
+---
 
-## Heroku Deployment
+### Heroku Deployment
 
-Nova Restaurant is deployed on Heroku.
+Nova Restaurant is deployed on Heroku.  
 Follow these steps to deploy your own instance:
 
-## 1.	Prerequisites:
-  - A Heroku account.
-	- A Cloudinary account for image hosting.
-	- Git and Heroku CLI installed locally.
+1. **Prerequisites:**
+    - A [Heroku](https://www.heroku.com/) account.
+    - A [Cloudinary](https://cloudinary.com/) account for image hosting.
+    - Git and [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli) installed locally.
 
-### 2.	Prepare your project for deployment:
-  -	Ensure the following files exist in your repo:
-  - requirements.txt – installable dependencies (pip freeze > requirements.txt)
-  - runtime.txt – Python version, e.g.: [python-3.12.2]
-  - Procfile – to tell Heroku how to run the app: [web: gunicorn nova.wsgi]
-  - Add 'django-heroku', 'dj-database-url', 'gunicorn', 'psycopg2' and 'cloudinary' to your dependencies if not already included.
+2. **Prepare your project for deployment:**
+    Ensure the following files exist in your repository:
+    - `requirements.txt` – installable dependencies:
+      ```bash
+      pip freeze > requirements.txt
+      ```
+    - `runtime.txt` – Python version (e.g.):
+      ```
+      python-3.12.2
+      ```
+    - `Procfile` – tells Heroku how to run the app:
+      ```
+      web: gunicorn nova.wsgi
+      ```
+    - Add these dependencies if not already included:
+      ```
+      django-heroku
+      dj-database-url
+      gunicorn
+      psycopg2
+      cloudinary
+      ```
 
-### 3.	Push your code to GitHub (Heroku will deploy from there).
+3. **Push your code to GitHub** (Heroku will deploy from there).
 
-### 4.	Create the Heroku app:
-  - heroku login
-  - heroku create your-app-name
+4. **Create the Heroku app:**
+    ```bash
+    heroku login
+    heroku create your-app-name
+    ```
 
-### 5.	Add Heroku Postgres:
-  - heroku addons:create heroku-postgresql:hobby-dev
+5. **Add Heroku Postgres:**
+    ```bash
+    heroku addons:create heroku-postgresql:hobby-dev
+    ```
 
-### 6.	Set environment variables in Heroku:
-  - In the Heroku dashboard, go to Settings → Reveal Config Vars and add:
-    - SECRET_KEY=<your-secret-key>
-    - DATABASE_URL=<automatically provided by Heroku Postgres>
-    - CLOUDINARY_URL=<your-cloudinary-url>
-    - DISABLE_COLLECTSTATIC=1   # Temporarily for first deploy if static files cause errors
-    - DEBUG=False
-    - ALLOWED_HOSTS=your-app-name.herokuapp.com
+6. **Set environment variables in Heroku:**
+    In the Heroku dashboard:
+    - Go to **Settings → Reveal Config Vars** and add:
+      ```
+      SECRET_KEY=<your-secret-key>
+      DATABASE_URL=<provided by Heroku Postgres>
+      CLOUDINARY_URL=<your-cloudinary-url>
+      DISABLE_COLLECTSTATIC=1  # Temporarily for first deploy if static files cause errors
+      DEBUG=False
+      ALLOWED_HOSTS=your-app-name.herokuapp.com
+      ```
 
-### 7.	Deploy to Heroku:
-  - heroku run python manage.py migrate
+7. **Deploy to Heroku:**
+    ```bash
+    git push heroku main
+    ```
 
-### 8.	Run migrations on Heroku:
-  - heroku run python manage.py migrate
+8. **Run migrations on Heroku:**
+    ```bash
+    heroku run python manage.py migrate
+    ```
 
-### 9.	(Optional) Create a superuser for Heroku:
-  - heroku run python manage.py createsuperuser
+9. **(Optional) Create a superuser for Heroku:**
+    ```bash
+    heroku run python manage.py createsuperuser
+    ```
 
-### 10.	Collect static files (if disabled earlier):
-  - heroku run python manage.py collectstatic
+10. **Collect static files (if disabled earlier):**
+    ```bash
+    heroku run python manage.py collectstatic
+    ```
 
-### 11.	Open your live app:
-  - heroku open
-  - Or visit https://your-app-name.herokuapp.com/.
+11. **Open your live app:**
+    ```bash
+    heroku open
+    ```
+    Or visit:
+    ```
+    https://your-app-name.herokuapp.com/
+    ```
 
-  
+
+## Testing
+
+### Code Validation
+
+To ensure code quality and best practices, the following validation tools were used:
+
+- **HTML** — All HTML templates were tested using the [W3C Markup Validation Service](https://validator.w3.org/).  
+
+
+- **CSS** — All custom CSS was tested with the [W3C CSS Validator](https://jigsaw.w3.org/css-validator/).  
+![W3C Screenshot](./static/readme_images/w3c.png)
+
+- **Python** — Python code was checked using [PEP8 Online](https://pep8ci.herokuapp.com/) to confirm it met PEP8 style guidelines.  
+- **JavaScript** — Custom JavaScript was tested with [JSHint](https://jshint.com/) to ensure there were no syntax errors.  
+
+All validation tools reported no critical errors. Any minor warnings were reviewed and addressed where necessary.
+
+---
+
+### Manual Testing
+
+Each feature of the Nova Restaurant site was tested manually to confirm it worked as intended.  
+Testing was carried out in Chrome, Firefox, and Safari, as well as on mobile devices (iOS and Android).  
+
+| Feature | Test Steps | Expected Result | Actual Result |
+|---------|-----------|-----------------|---------------|
+| Navigation Menu | Click each menu link on desktop and mobile | Correct page loads without errors | Pass |
+| Menu Page | View menu items with images, prices, and dietary info | Items display correctly with images and details | Pass |
+| Reservation System | Submit booking form with valid data | Confirmation displayed, reservation saved in database | Pass |
+| Review Submission | Submit review form as logged-in user | Review appears in list with correct details | Pass |
+| Contact Form | Send message with valid data | Success message shown, message saved to database | Pass |
+| Login/Signup | Create account, log in, log out | Account created, user logged in/out correctly | Pass |
+| Image Loading | Check images from Cloudinary display on all pages | All images load correctly on all devices | Pass |
+
+---
+
+### Responsiveness Testing
+
+The site’s responsiveness was tested using:
+
+- **Chrome DevTools Device Toolbar** for multiple screen sizes.  
+- Physical devices: iPhone, iPad, and Android smartphones.  
+
+All pages adapt correctly to different screen sizes without layout issues.
+
+---
+
+### Known Issues
+
+- Occasionally, Cloudinary images may take a moment to load on very slow connections. This is due to network speed rather than a site bug.  
+- No other significant issues were found during testing.
 
 
 
