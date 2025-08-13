@@ -8,6 +8,67 @@
 
 Nova Restaurant is a modern, immersive web application designed to capture the unique dining experience of a futuristic restaurant. Built as part of my journey in full-stack web development at Code Institute, this project showcases innovative design, responsive functionality, and seamless user interactions that reflect the restaurant’s star-inspired theme.
 
+## Features
+
+### Homepage
+
+![Homepage Screenshot](./static/readme_images/homepage.png)
+
+**Design Rationale:**
+- Clean, minimal hero section to immediately capture attention.
+- High-quality cocktail image to reflect the elegance and luxury of Nova Restaurant.
+- Bold headline with inviting subtext to clearly communicate the restaurant’s unique experience.
+- Prominent call-to-action button (“Make a reservation today”) for quick user engagement.
+- Warm colour palette for a sophisticated, welcoming feel.
+
+### Menu Page
+
+![Menu Page Screenshot](./static/readme_images/Menu.png)
+
+**Design Rationale:**
+- Clean, card-based layout for easy scanning of dishes.
+- High-quality, appetising food images to encourage user engagement.
+- Clear spice-level indicators with visual icons for quick recognition.
+- Dietary labels (Vegan, Gluten Free) prominently displayed for accessibility and inclusivity.
+- Tab navigation for quick switching between categories without leaving the page.
+- Consistent pricing placement for improved readability.
+
+### Reservations Page
+
+![Reservations Page Screenshot](docs/reservations.png)
+
+**Design Rationale:**
+- Minimalist and user-friendly form layout for quick booking.
+- Clear input fields for essential booking details (name, contact info, date, time, number of guests).
+- Integrated date and time pickers to reduce input errors.
+- Prominent “Book Now” button for immediate call-to-action.
+- Display of existing reservations for user clarity and confirmation.
+- Informative opening hours and booking guidelines placed above the form to set clear expectations.
+
+### Find Us Page
+
+![Find Us Page Screenshot](./static/readme_images/find_us.png)
+
+**Design Rationale:**
+- Clean, centralised heading with a short description to welcome visitors.
+- Informative location text that highlights the restaurant’s vibrant surroundings.
+- Physical address displayed clearly with an address icon for quick recognition.
+- Integrated Google Maps embed for easy navigation and route planning.
+- Balanced two-column layout: text on the left, interactive map on the right.
+- Maintains brand tone with cosmic-themed language while ensuring practicality for users.
+
+### Leave a Review Page
+
+![Leave a Review Page Screenshot](./static/readme_images/review.png)
+
+**Design Rationale:**
+- Clean, minimal form layout to encourage user participation.
+- Large heading to clearly communicate the page’s purpose.
+- Simple three-field structure: review title, rating, and main feedback area.
+- Prominent blue “Submit Review” button to draw attention and improve conversion.
+- Plenty of whitespace around fields for a distraction-free experience.
+- Maintains consistent styling with rounded corners and light background to match the rest of the site’s aesthetic.
+- Designed for clarity and usability across devices, ensuring an accessible review submission process.
 
 ## Key Features
 
@@ -73,6 +134,29 @@ The business model of Nova Restaurant is primarily service-based, centered aroun
 
 - **Upselling Opportunities:**  
   Guests can enhance their dining experience with curated add-ons—such as wine pairings, and space-themed beverages.
+
+
+## Data and Security Features
+
+Nova Restaurant has been designed with both user privacy and application security in mind. The following measures are implemented to ensure data protection:
+
+- **Environment Variables:**  
+  Sensitive information such as the `SECRET_KEY`, database credentials, and Cloudinary API details are stored in environment variables using a `.env` file, which is excluded from version control to prevent unauthorized access.  
+
+- **Django Authentication System:**  
+  User accounts are managed through Django’s built-in authentication system, which includes secure password hashing and user session management. Only authenticated users can create, edit, or delete their own reviews and reservations.  
+
+- **CSRF Protection:**  
+  Cross-Site Request Forgery protection is enabled site-wide, ensuring that all POST requests are validated with CSRF tokens to prevent malicious request forgery.  
+
+- **Secure Data Storage:**  
+  Reservations, contact form messages, and customer reviews are stored securely in the project’s PostgreSQL database in production (SQLite during development). Access to this data is restricted to authorized users through Django’s permission system and custom views.  
+
+- **Production Security Settings:**  
+  In production, `DEBUG` is set to `False` and allowed hosts are restricted to the Heroku app domain. Static and media files are served through secure connections.  
+
+- **Admin and CMS Access Control:**  
+  The custom content management system and Django admin are restricted to superusers, ensuring that only authorized personnel can modify sensitive site content or user data.  
 
 
   #### Product Goals
@@ -305,6 +389,28 @@ Follow these steps to deploy your own instance:
     https://your-app-name.herokuapp.com/
     ```
 
+## Features Left to Implement
+
+- **Email Confirmation for Reservations:**  
+  Implement an automated email system that sends a confirmation message to guests after successfully making a reservation.  
+
+- **Customer Accounts with Order History:**  
+  Allow customers to create accounts where they can view their past reservations, leave reviews, and receive personalized offers.  
+
+- **Pre-Order Functionality:**  
+  Enable guests to order food in advance so that their meals are ready upon arrival for their reservation time, enhancing efficiency and the overall dining experience.  
+
+## Accessibility Statement
+
+This project has been developed with accessibility in mind to ensure that it can be used by as many people as possible, including those with disabilities.
+
+- **Colour Contrast:** All text and background colour combinations meet WCAG 2.1 AA contrast ratio guidelines to ensure readability.  
+- **Alt Text:** All images across the site include descriptive `alt` attributes to support screen readers and improve accessibility for visually impaired users.  
+- **Keyboard Navigation:** All interactive elements, such as links, buttons, and forms, can be accessed and used via keyboard navigation without requiring a mouse.  
+- **ARIA Landmarks:** Where necessary, ARIA roles and landmarks are used to enhance navigation for assistive technologies.
+
+These measures aim to provide an inclusive and accessible experience for all users.
+
 
 ## Testing
 
@@ -318,9 +424,11 @@ To ensure code quality and best practices, the following validation tools were u
 - **CSS** — All custom CSS was tested with the [W3C CSS Validator](https://jigsaw.w3.org/css-validator/).  
 ![W3C CSS Screenshot](./static/readme_images/CSS.png)
 
-- **Python** — Python code was checked using [PEP8 Online](https://pep8ci.herokuapp.com/) to confirm it met PEP8 style guidelines.  
+- **Python** — Python code was checked using the terminal-based `flake8` command to confirm it met PEP8 style guidelines.  
+![PEP8 Python Screenshot](./static/readme_images/flake8.png)
 
 - **JavaScript** — Custom JavaScript was tested with [JSHint](https://jshint.com/) to ensure there were no syntax errors.  
+![JShint Screenshot](./static/readme_images/JStest.png)
 
 All validation tools reported no critical errors. 
 
@@ -359,6 +467,46 @@ All pages adapt correctly to different screen sizes without layout issues.
 - Occasionally, Cloudinary images may take a moment to load on very slow connections. This is due to network speed rather than a site bug.  
 - No other significant issues were found during testing.
 
+
+## Lighthouse Performance & Accessibility
+
+Lighthouse was used via Chrome DevTools to test the deployed site’s **Performance**, **Accessibility**, **Best Practices**, and **SEO**.
+
+**Testing Steps:**
+1. Opened the deployed Heroku site in Google Chrome.
+2. Opened Chrome DevTools → Lighthouse tab.
+3. Selected "Mobile" and "Desktop" tests with all categories checked.
+4. Clicked **Generate Report**.
+
+**Results (Desktop & Mobile):**  
+
+![Lighthouse Results](./static/readme_images/lighthouse.png)  
+
+- **Performance:** 95  
+- **Accessibility:** 95  
+- **Best Practices:** 78  
+- **SEO:** 91  
+
+**Notes:**  
+The lower Best Practices score is due to some minor optimizations (e.g., HTTPS usage warnings from third-party resources) that do not affect core functionality.
+
+
+## Credits & Acknowledgements
+
+- **Code Institute:**  
+  For providing the course structure, lessons, and guidance that formed the foundation for building this project.  
+
+- **Code Institute Slack Community:**  
+  For their quick responses, valuable insights, and helpful feedback throughout the development process.  
+
+- **Documentation & Tutorials:**  
+  Django and Bootstrap official documentation, Cloudinary integration guides, and various Python/Django tutorials were referenced to ensure best practices in coding and deployment.  
+
+- **Image Sources:**  
+  High-quality images sourced from [Unsplash](https://unsplash.com/) and AI-generated imagery to match the restaurant’s futuristic theme.  
+
+- **Personal Support:**  
+  Special thanks to my cousin, **Jose Omar Gonzalez**, a full stack developer, who was with me every step of the way, providing guidance, support, and technical expertise.  
 
 
 

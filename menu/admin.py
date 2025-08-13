@@ -40,10 +40,11 @@ class MenuAdmin(admin.ModelAdmin):
 
     def image_preview(self, obj):
         if obj.image:
-            # larger preview on the change form
             return format_html(
-                '<img src="{}" style="max-height:160px; border-radius:10px;" alt="preview" />',
+                '<img src="{}" style="max-height:160px; border-radius:10px;" '
+                'alt="preview" />',
                 obj.image.url,
             )
         return "No image yet"
+
     image_preview.short_description = "Current image"
