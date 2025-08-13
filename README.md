@@ -177,3 +177,109 @@ The business model of Nova Restaurant is primarily service-based, centered aroun
 - [Heroku](https://www.heroku.com) - Was used for the hosting and deployment of the production website. Through development and deployment I have ensure the version deployed to Heroku is the same as the development codebase as it deploys directly from this repo on GitHub whenever a change is committed.
 
 
+## Deployment
+
+### Local Deployment
+
+1. **Clone the repository:** 
+
+    ```bash
+    git clone https://github.com/BryanGon13/Nova.git
+
+2. **Create and activate a virtual environment:**
+
+    source venv/bin/activate
+
+3.	**Install dependencies:**
+
+    pip install -r requirements.txt
+
+4.	**Create a .env file in the project root (do not commit this file) with the following variables:**
+
+    SECRET_KEY=<your-secret-key>
+    DATABASE_URL=sqlite:///db.sqlite3
+    CLOUDINARY_URL=<your-cloudinary-url>
+    DEBUG=True
+
+5. **Run migrations:**
+
+    python manage.py migrate
+
+6. **Start the server:**
+
+    python manage.py runserver
+
+Visit http://127.0.0.1:8000 to view the site locally.
+
+
+### Heroku Deployment
+
+Nova Restaurant is deployed on Heroku.
+
+Follow these steps to deploy your own instance:
+
+1.	**Prerequisites:**
+
+	- A Heroku account.
+	- A Cloudinary account for image hosting.
+	- Git and Heroku CLI installed locally.
+
+2.	**Prepare your project for deployment:**
+
+	-	Ensure the following files exist in your repo:
+	-	requirements.txt – installable dependencies (pip freeze > requirements.txt)
+	-	runtime.txt – Python version, e.g.: [python-3.12.2]
+  - Procfile – to tell Heroku how to run the app: [web: gunicorn nova.wsgi]
+  - Add 'django-heroku', 'dj-database-url', 'gunicorn', 'psycopg2' and 'cloudinary' to your dependencies if not already included.
+
+3.	**Push your code to GitHub (Heroku will deploy from there).**
+
+4.	**Create the Heroku app:**
+
+    heroku login
+    heroku create your-app-name
+
+5.	**Add Heroku Postgres:**
+
+    heroku addons:create heroku-postgresql:hobby-dev
+
+6.	**Set environment variables in Heroku:**
+
+    In the Heroku dashboard, go to Settings → Reveal Config Vars and add:
+
+    SECRET_KEY=<your-secret-key>
+    DATABASE_URL=<automatically provided by Heroku Postgres>
+    CLOUDINARY_URL=<your-cloudinary-url>
+    DISABLE_COLLECTSTATIC=1   # Temporarily for first deploy if static files cause errors
+    DEBUG=False
+    ALLOWED_HOSTS=your-app-name.herokuapp.com
+
+7.	Deploy to Heroku:
+
+    heroku run python manage.py migrate
+
+8.	Run migrations on Heroku:
+
+    heroku run python manage.py migrate
+
+9.	(Optional) Create a superuser for Heroku:
+
+    heroku run python manage.py createsuperuser
+
+10.	Collect static files (if disabled earlier):
+
+    heroku run python manage.py collectstatic
+
+11.	Open your live app:
+
+    heroku open
+    Or visit https://your-app-name.herokuapp.com/.
+
+  
+
+
+
+
+
+
+
