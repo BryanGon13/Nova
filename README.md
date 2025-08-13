@@ -313,15 +313,16 @@ Follow these steps to deploy your own instance:
 To ensure code quality and best practices, the following validation tools were used:
 
 - **HTML** — All HTML templates were tested using the [W3C Markup Validation Service](https://validator.w3.org/).  
-
+![W3C HTML Screenshot](./static/readme_images/w3c.png)
 
 - **CSS** — All custom CSS was tested with the [W3C CSS Validator](https://jigsaw.w3.org/css-validator/).  
-![W3C Screenshot](./static/readme_images/w3c.png)
+![W3C CSS Screenshot](./static/readme_images/CSS.png)
 
 - **Python** — Python code was checked using [PEP8 Online](https://pep8ci.herokuapp.com/) to confirm it met PEP8 style guidelines.  
+
 - **JavaScript** — Custom JavaScript was tested with [JSHint](https://jshint.com/) to ensure there were no syntax errors.  
 
-All validation tools reported no critical errors. Any minor warnings were reviewed and addressed where necessary.
+All validation tools reported no critical errors. 
 
 ---
 
