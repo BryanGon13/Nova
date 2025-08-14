@@ -12,6 +12,7 @@ Nova Restaurant is a modern, immersive web application designed to capture the u
 
 ### Homepage
 
+![Wireframe Screenshot](./static/readme_images/wf-home.png)
 ![Homepage Screenshot](./static/readme_images/homepage.png)
 
 **Design Rationale:**
@@ -23,6 +24,7 @@ Nova Restaurant is a modern, immersive web application designed to capture the u
 
 ### Menu Page
 
+![wireframe Screenshot](./static/readme_images/wf-menu.png)
 ![Menu Page Screenshot](./static/readme_images/Menu.png)
 
 **Design Rationale:**
@@ -35,6 +37,7 @@ Nova Restaurant is a modern, immersive web application designed to capture the u
 
 ### Reservations Page
 
+![Wireframe Screenshot](./static/readme_images/wf-reservations.png)
 ![Reservations Page Screenshot](./static/readme_images/reservations.png)
 
 **Design Rationale:**
@@ -47,6 +50,7 @@ Nova Restaurant is a modern, immersive web application designed to capture the u
 
 ### Find Us Page
 
+![Wireframe Screenshot](./static/readme_images/wf-find-us.png)
 ![Find Us Page Screenshot](./static/readme_images/find_us.png)
 
 **Design Rationale:**
@@ -59,6 +63,7 @@ Nova Restaurant is a modern, immersive web application designed to capture the u
 
 ### Leave a Review Page
 
+![Wireframe Screenshot](./static/readme_images/wf-review.png)
 ![Leave a Review Page Screenshot](./static/readme_images/review.png)
 
 **Design Rationale:**
