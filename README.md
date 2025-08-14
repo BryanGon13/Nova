@@ -35,7 +35,7 @@ Nova Restaurant is a modern, immersive web application designed to capture the u
 
 ### Reservations Page
 
-![Reservations Page Screenshot](docs/reservations.png)
+![Reservations Page Screenshot](./static/readme_images/reservations.png)
 
 **Design Rationale:**
 - Minimalist and user-friendly form layout for quick booking.
